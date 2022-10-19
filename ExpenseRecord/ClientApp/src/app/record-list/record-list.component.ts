@@ -53,6 +53,10 @@ export class RecordListComponent implements OnInit, OnDestroy{
     }
     this.record.displayList = [... this.record.displayList.sort((i1, i2) => (new Date(i1.date).getTime() - new Date(i2.date).getTime()) * (this.sortByDateDir === SortDir.Asc ? 1 : -1))];
   }
+
+  CreateNew(){
+    
+  }
  
 
   private loadData(): void {
