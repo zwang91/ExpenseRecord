@@ -34,8 +34,5 @@ namespace ExpenseRecord.Services
             RecordItem item = recordItemLists.Find(x => x.Id == id);
             recordItemLists.Remove(item);
         }
-
-
-        
-        }
+    }
 }

@@ -1,0 +1,33 @@
+
+<h1>Expense Record</h1>
+
+
+<div class="search">
+  <input (ngModelChange)="onSearchTextChange($event)" [ngModel]="searchString" placeholder="Search ...">
+  <button (click)="reload()" class="button-default">Reload</button>
+</div>
+
+
+<div class="list-actions">
+  <button (click)="toggleSortByDate()" class="button-default">
+    <span>Sort by Created Time</span>
+    <ng-container *ngIf="sortByDateDir">
+      <span *ngIf="sortByDateDir === SortDir.Asc"><strong>&#8593;</strong></span>
+      <span *ngIf="sortByDateDir === SortDir.Desc"><strong>&#8595;</strong></span>
+    </ng-container>
+  </button>
+</div>
+
+
+<div>
+  <h3>Add expense</h3>
+  <div><span> Description </span> <input  formControlName="description"></div>
+  <div><span> Type </span><input  formControlName="type"></div>
+  <div><span> Date </span><input  formControlName="date"></div>
+  <div><span> Amount </span><input  formControlName="amount"></div>
+
+  <div class="create-item">
+    <button (click)="CreateNew()" class="button-blue">Create Item</button>
+  </div>
+</div>
+

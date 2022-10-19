@@ -6,7 +6,7 @@ using ExpenseRecord.Services;
 namespace ExpenseRecord.Controllers;
 
 [ApiController]
-[Route("[Controller]")]
+[Route("api/expense")]
 public class ExpenseRecordController : ControllerBase
 {
     private readonly IExpenseRecordServices _expenseRecordServices;
@@ -17,7 +17,6 @@ public class ExpenseRecordController : ControllerBase
     }
 
     [HttpPost]
-    [Route("{Id}")]
     public async Task<IActionResult> CreateItem(RecordItem recordItem)
     {
         try
@@ -39,7 +38,6 @@ public class ExpenseRecordController : ControllerBase
     }
 
     [HttpDelete]
-    [Route("{Id}")]
     public async Task<IActionResult> DeleteItemAsync(string id)
     {
         try
