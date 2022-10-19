@@ -4,7 +4,9 @@ namespace ExpenseRecord.Services
 {
     public interface IExpenseRecordServices
     {
-        Task<string> CreateItemAsync(RecordItem recordItem);
+        Task<string> CreateItem(RecordItem recordItem);
+        Task<List<RecordItem>> GetAll();
+        Task DeleteItem(string id);
 
     }
 }

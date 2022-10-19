@@ -1,18 +1,14 @@
 ﻿using ExpenseRecord.Item;
 using ExpenseRecord.Services;
-namespace WebApplication2.Services
+using System.Data.Entity;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
+
+namespace ExpenseRecord.Services
 {
     public class ExpenseRecordServices : IExpenseRecordServices
     {
-        private readonly ApplicationDbContext _applicationDbContext;
-
-        public ExpenseRecordServices(ApplicationDbContext applicationDbContext)
-        {
-            _applicationDbContext = applicationDbContext;
-        }
-
-
-        public async Task<string> CreateItemAsync (RecordItem recordItem)
+        public List<RecordItem> recordItemLists = new List<RecordItem>();
+        public async Task<string> CreateItem (RecordItem recordItem)
         {
             var id = Guid.NewGuid().ToString();
             var recordGetItem = new RecordItem
@@ -23,10 +19,23 @@ namespace WebApplication2.Services
                 Amount = recordItem.Amount,
                 Date = DateTime.Now
             };
-            _applicationDbContext.RecordItem.Add(recordGetItem);
-            await _applicationDbContext.SaveChangesAsync();
+            recordItemLists.Add(recordGetItem);
+            
             return id;
 
         }
-    }
+        public async Task<List<RecordItem>> GetAll()
+        {
+            return recordItemLists;
+        }
+
+        public async Task DeleteItem (string id)
+        {
+            RecordItem item = recordItemLists.Find(x => x.Id == id);
+            recordItemLists.Remove(item);
+        }
+
+
+        
+        }
 }

@@ -20,6 +20,6 @@ namespace ExpenseRecord.Item
         public DateTime? Date { get; set; }
 
         [Column("amount")]
-        public int ? Amount { get; set; }
+        public string ? Amount { get; set; }
     }
 }

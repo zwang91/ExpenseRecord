@@ -17,16 +17,39 @@ public class ExpenseRecordController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateItemAsync(RecordItem recordItem)
+    [Route("{Id}")]
+    public async Task<IActionResult> CreateItem(RecordItem recordItem)
     {
         try
         {
-            var id = await _expenseRecordServices.CreateItemAsync(recordItem);
+            var id = await _expenseRecordServices.CreateItem(recordItem);
             return Ok(id);
         }
         catch
         {
             return NotFound();
         };
+    }
+
+    [HttpGet]
+    public async Task<List<RecordItem>> GetAll()
+    {
+        var recordItems = await _expenseRecordServices.GetAll();
+        return recordItems;
+    }
+
+    [HttpDelete]
+    [Route("{Id}")]
+    public async Task<IActionResult> DeleteItemAsync(string id)
+    {
+        try
+        {
+            await _expenseRecordServices.DeleteItem(id);
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 }
